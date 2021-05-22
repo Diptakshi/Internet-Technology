@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Diptakshi's Timer</title>
+  </head>
+  <body onload="timer()">
+    <div id="time">Current Time : <span id="gmt"></span></div>
+    <br />
+    <h1 style="font-family: sans-serif;">Time to compare with</h1>
+    <p>
+      <strong>After inputing the value take mouse out of the input box </strong>
+    </p>
+    <div class="date_time">
+      <span>hour </span><input type="text" maxlength="2" id="hour" /> &nbsp;
+      <span>minute </span><input type="text" maxlength="2" id="minute" /> &nbsp;
+      <span>seconds </span><input type="text" maxlength="2" id="second" />
+    </div>
+
+    <script type="text/javascript">
+      function timer() {
+        var time = new Date();
+        document.querySelector("span").innerHTML = time.toString();
+
+        document
+          .querySelector(".date_time")
+          .addEventListener("mouseout", function () {
+            var h_d = parseInt(document.querySelector("#hour").value);
+            var m_d = parseInt(document.querySelector("#minute").value);
+            var s_d = parseInt(document.querySelector("#second").value);
+
+            var h = time.getHours();
+            var m = time.getMinutes();
+            var s = time.getSeconds();
+
+            if (
+              h_d > h ||
+              (h_d == h && m_d > m) ||
+              (h_d == h && m_d == m && s_d > s)
+            ) {
+              document.querySelector("#gmt").style.color = "red";
+              clearTimeout(t);
+            }
+          });
+
+        var t = setTimeout(timer, 900);
+      }
+    </script>
+  </body>
+</html>
